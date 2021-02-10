@@ -2,7 +2,6 @@ package br.com.viasoft.livros.controle;
 
 import br.com.viasoft.livros.dto.ProdutoFormularioDTO;
 import br.com.viasoft.livros.model.Produto;
-import br.com.viasoft.livros.repository.ProdutoRepository;
 import br.com.viasoft.livros.service.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
-import javax.websocket.server.PathParam;
 import java.util.List;
 
 @Controller
@@ -36,6 +34,15 @@ public class ProdutoController {
         return "produto/listaprodutos";
     }
 
+    @GetMapping("/produto/edit/{id}")
+    public String editaProduto(@PathVariable("id") Long id, ProdutoFormularioDTO produtoFormularioDTO, Model model){
+        Produto produto = produtoService.findById(id).orElse(null);
+        model.addAttribute("produto", produto);
+        produtoFormularioDTO = new ProdutoFormularioDTO(produto);
+        model.addAttribute("produto", produto);
+        model.addAttribute("dto", produtoFormularioDTO);
+        return "produto/suamae";
+    }
 
     @GetMapping("/produto/{id}")
      public String listaProdutoById(@PathVariable("id") Long id, Model model){

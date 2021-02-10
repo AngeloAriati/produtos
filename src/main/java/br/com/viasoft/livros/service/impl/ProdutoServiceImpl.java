@@ -31,6 +31,21 @@ public class ProdutoServiceImpl extends CrudServiceImpl<Produto, Long> implement
     }
     @Override
     public List<Produto> findByAutor(String autor){
-        return produtoRepository.findAllByAutorIgnoreCase(autor);
+        return produtoRepository.findAllByAutorContainsIgnoreCase(autor);
+    }
+
+
+
+
+
+
+    @Override
+    public void preSave(Produto produto) {
+        System.out.println("Passei pelo pre save, o id era nulo");
+    }
+
+    @Override
+    public void postSave(Produto produto) {
+        System.out.println(String.format("Passei pelo post save, o id é %d", produto.getId()));
     }
 }
