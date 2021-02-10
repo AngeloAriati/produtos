@@ -2,10 +2,7 @@ package br.com.viasoft.livros.model;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Data
 @Entity
@@ -15,6 +12,7 @@ public class Produto implements Comparable<Produto> {
     private Long id;
     private String nome;
     private String autor;
+    @Lob
     private String imagem;
 
     @Override

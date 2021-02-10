@@ -6,7 +6,7 @@
 </head>
 <body>
 <div id="conteudo" class="container">
-    <form th:object="${dto}" method="post" th:action="@{/produto/salvar}">
+    <form th:object="${dto}" method="post" th:action="@{'/produto/salvar/' + *{id}}">
         <div class="card mt-3">
             <div class="card-body">
                 <div class="form-group">
@@ -34,10 +34,14 @@
 
                 <div class="form-group">
                     <label for="imagem">Url da Imagem: </label>
-                    <input name="imagem" class="form-control" id="imagem" type="text" placeholder="http://imagem.jpg">
+                    <input th:field="*{imagem}" name="imagem" class="form-control" id="imagem" type="text" placeholder="http://imagem.jpg">
                     <span class="small"> Insira a url da imagem do livro.</span>
                 </div>
-                <button class="btn btn-primary mt-2" type="submit">Salvar</button>
+                <button class="btn btn-primary mt-2" type="submit">Editar</button>
+                <a th:href="@{'/produto/'+ *{id}}" class="btn btn-warning mt-2" type="button">Cancelar</a>
+                <a class="btn btn-danger mt-2" type="button">Deletar</a>
+                     </div>
+                 </div>
             </div>
         </div>
     </form>
